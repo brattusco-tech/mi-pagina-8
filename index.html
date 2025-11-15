@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mi Página Interactiva</title>
+
+<style>
+    /* --- FONDO DE VIDEO --- */
+    #videoFondo {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        object-fit: cover;
+        z-index: -2;
+    }
+
+    /* --- ESTILO GENERAL --- */
+    body {
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        font-family: Arial, sans-serif;
+        position: relative;
+    }
+
+    /* --- IMAGEN FLOTANTE REBOTANDO --- */
+    #imagenRebote {
+        position: absolute;
+        width: 85vw;
+        max-width: 400px;
+        border-radius: 20px;
+        box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+    }
+</style>
+
+</head>
+<body>
+
+<!-- ⭐⭐⭐ VIDEO DE FONDO ⭐⭐⭐ -->
+<video id="videoFondo" autoplay muted loop>
+    <source src="https://github.com/derektusco-collab/mi-pagina/raw/refs/heads/main/WhatsApp%20Video%202025-11-12%20at%2015.14.03.mp4" type="video/mp4">
+</video>
+<!-- ⭐⭐⭐ FIN VIDEO ⭐⭐⭐ -->
+
+<!-- ⭐⭐⭐ TU IMAGEN ⭐⭐⭐ -->
+<img id="imagenRebote" src="https://i.ibb.co/twnssWpT/IMG-20251027-000859-446.jpg">
+<!-- ⭐⭐⭐ FIN IMAGEN ⭐⭐⭐ -->
+
+<script>
+    const img = document.getElementById("imagenRebote");
+
+    let x = 50;
+    let y = 50;
+
+    /* ⭐ Movimiento suave y lento para recorrer toda la pantalla ⭐ */
+    let velX = 2;
+    let velY = 2;
+
+    function moverImagen() {
+        const anchoPantalla = window.innerWidth;
+        const altoPantalla = window.innerHeight;
+        const anchoImg = img.offsetWidth;
+        const altoImg = img.offsetHeight;
+
+        x += velX;
+        y += velY;
+
+        if (x <= 0 || x + anchoImg >= anchoPantalla) velX *= -1;
+        if (y <= 0 || y + altoImg >= altoPantalla) velY *= -1;
+
+        img.style.left = x + "px";
+        img.style.top = y + "px";
+
+        requestAnimationFrame(moverImagen);
+    }
+
+    moverImagen();
+</script>
+
+</body>
+</html>
